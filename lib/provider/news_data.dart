@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:news_api_fetch/models/news.dart';
 import 'package:news_api_fetch/network/net_client.dart';
 
-const bool useDummyData = false;
+const bool useDummyData = false; // TODO: Set this to [false] after every debugging sessions
 
 class NewsData with ChangeNotifier {
   final Map<String, Map<String, List<News>>> _data = useDummyData ? _dummyData : {};
@@ -61,6 +61,91 @@ extension IsSaved on News {
 }
 
 Map<String, Map<String, List<News>>> _dummyData = {
+  'dummy': {
+    '': [
+      News({
+        'title': 'Cool cat makes an appearance in local location at a certain time during the day',
+        'link': 'https://example.com/',
+        'contentSnippet': 'Cool cat makes an appearance in local location at a certain time during the day. Locals were unsure of the cat\'s motive, but nobody eventually cared.',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/1.jpg',
+        },
+      }),
+      News({
+        'title': 'A new discovery of an isolated island in the middle of nowhere where nothing is anywhere',
+        'link': 'https://example.com/',
+        'contentSnippet': 'A new discovery of an isolated island in the middle of nowhere where nothing is anywhere. Scientists think this would be the biggest discovery of the second, or perhaps even minute!',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/2.jpg',
+        },
+      }),
+      News({
+        'title': 'Top tips to start your professional programming journey with nothing but a simple setup in your own room',
+        'link': 'https://example.com/',
+        'contentSnippet': 'Top tips to start your professional programming journey with nothing but a simple setup in your own room. You will need a computer, a chair, a desk, and a sincere intention.',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/3.jpeg',
+        },
+      }),
+      News({
+        'title': 'Cool cat makes an appearance in local location at a certain time during the day',
+        'link': 'https://example.com/',
+        'contentSnippet': 'Cool cat makes an appearance in local location at a certain time during the day. Locals were unsure of the cat\'s motive, but nobody eventually cared.',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/1.jpg',
+        },
+      }),
+      News({
+        'title': 'A new discovery of an isolated island in the middle of nowhere where nothing is anywhere',
+        'link': 'https://example.com/',
+        'contentSnippet': 'A new discovery of an isolated island in the middle of nowhere where nothing is anywhere. Scientists think this would be the biggest discovery of the second, or perhaps even minute!',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/2.jpg',
+        },
+      }),
+      News({
+        'title': 'Top tips to start your professional programming journey with nothing but a simple setup in your own room',
+        'link': 'https://example.com/',
+        'contentSnippet': 'Top tips to start your professional programming journey with nothing but a simple setup in your own room. You will need a computer, a chair, a desk, and a sincere intention.',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/3.jpeg',
+        },
+      }),
+      News({
+        'title': 'Cool cat makes an appearance in local location at a certain time during the day',
+        'link': 'https://example.com/',
+        'contentSnippet': 'Cool cat makes an appearance in local location at a certain time during the day. Locals were unsure of the cat\'s motive, but nobody eventually cared.',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/1.jpg',
+        },
+      }),
+      News({
+        'title': 'A new discovery of an isolated island in the middle of nowhere where nothing is anywhere',
+        'link': 'https://example.com/',
+        'contentSnippet': 'A new discovery of an isolated island in the middle of nowhere where nothing is anywhere. Scientists think this would be the biggest discovery of the second, or perhaps even minute!',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/2.jpg',
+        },
+      }),
+      News({
+        'title': 'Top tips to start your professional programming journey with nothing but a simple setup in your own room',
+        'link': 'https://example.com/',
+        'contentSnippet': 'Top tips to start your professional programming journey with nothing but a simple setup in your own room. You will need a computer, a chair, a desk, and a sincere intention.',
+        'isoDate': '2000-01-01T00:00:00.000Z',
+        'image': {
+          'asset': 'debug_assets/3.jpeg',
+        },
+      }),
+    ],
+  },
   'cnn-news': {
     '': [
       News({

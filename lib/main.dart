@@ -1,18 +1,23 @@
 import 'dart:developer';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:news_api_fetch/models/news.dart';
 import 'package:news_api_fetch/portals.dart';
 import 'package:news_api_fetch/provider/news_data.dart';
 import 'package:provider/provider.dart';
 
-const bool kDebugMode = false;
+const bool kDebugMode = false; // TODO: Set this to [false] after every debugging sessions
+const bool useDevicePreview = false;
 const num screenPaddingXFactor = 32;
 const String generalErrorMessage = 'An error occured';
 
 void main() {
   runApp(ChangeNotifierProvider(
     create: (context) => NewsData(),
-    child: const MainApp(),
+    child: DevicePreview(
+      enabled: useDevicePreview,
+      builder: (context) => const MainApp(),
+    ),
   ));
 }
 
@@ -21,8 +26,11 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: InitPage(),
+    return MaterialApp(
+      useInheritedMediaQuery: true, // ignore: deprecated_member_use
+      builder: DevicePreview.appBuilder,
+      locale: DevicePreview.locale(context),
+      home: const InitPage(),
     );
   }
 }
@@ -84,7 +92,7 @@ class _InitPageState extends State<InitPage> {
           }
         })()?.round() ?? 0,
         onTap: (index) => setState(() {
-          pageController.animateToPage(index, duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+          pageController.animateToPage(index, duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
         }),
         items: List.generate(pages.length, (index) => BottomNavigationBarItem(
           icon: Icon(pages[index]['icon']),
@@ -199,6 +207,7 @@ class _HomePageState extends State<HomePage> with AutomaticKeepAliveClientMixin<
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const Icon(
                         Icons.cancel_outlined,
@@ -322,6 +331,7 @@ class SavedPage extends StatelessWidget {
               ),
               child: const Column(
                 mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Icon(
                     Icons.bookmark_border,
@@ -397,7 +407,23 @@ class NewsListItem extends StatelessWidget {
                     clipBehavior: Clip.antiAlias,
                     child: Hero(
                       tag: news.hashCode,
-                      child: Image.network(
+                      child: news.image.length == 1 && news.image.containsKey('asset') ? Image.asset(
+                        news.image['asset'],
+                        width: 96.0,
+                        height: double.infinity,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => const SizedBox(
+                          width: 96.0,
+                          height: double.infinity,
+                          child: Center(
+                              child: Icon(
+                                Icons.image_not_supported_outlined,
+                                size: 48.0,
+                                color: Colors.black54,
+                              ),
+                            ),
+                        ),
+                      ) : Image.network(
                         news.image['small'] ?? news.image['medium'] ?? news.image['large'] ?? news.image['only'] ?? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/aqxkAAAAABJRU5ErkJggg==',
                         width: 96.0,
                         height: double.infinity,
@@ -563,7 +589,22 @@ class DetailsPage extends StatelessWidget {
                   clipBehavior: Clip.antiAlias,
                   child: Hero(
                     tag: news.hashCode,
-                    child: Image.network(
+                    child: news.image.length == 1 && news.image.containsKey('asset') ? Image.asset(
+                      news.image['asset'],
+                      width: double.infinity,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => const SizedBox(
+                        width: double.infinity,
+                        height: 96.0,
+                        child: Center(
+                            child: Icon(
+                              Icons.image_not_supported_outlined,
+                              size: 48.0,
+                              color: Colors.black54,
+                            ),
+                          ),
+                      ),
+                    ) : Image.network(
                       news.image['large'] ?? news.image['medium'] ?? news.image['small'] ?? news.image['only'] ?? 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/wcAAwAB/aqxkAAAAABJRU5ErkJggg==',
                       width: double.infinity,
                       fit: BoxFit.cover,

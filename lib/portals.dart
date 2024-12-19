@@ -1,4 +1,9 @@
+const bool useDummyPortal = false; // TODO: Set this to [false] after every debugging sessions
+
 const Map<String, List<String>> portals = {
+  if (useDummyPortal) 'Dummy': [
+    '',
+  ],
   'CNN News': [
     '',
     'Nasional',
