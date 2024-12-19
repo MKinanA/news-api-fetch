@@ -7,10 +7,12 @@ environment:
   sdk: ^3.5.3
 
 dependencies:
+  device_preview: ^1.2.0
   flutter:
     sdk: flutter
   http: ^1.2.2
   provider: ^6.1.2
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +21,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - debug_assets/
